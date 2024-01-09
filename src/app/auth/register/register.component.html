@@ -30,7 +30,7 @@
           <div class="text-blueGray-400 text-center mb-3 font-bold">
             <small>Or sign up with credentials</small>
           </div>
-          <form>
+          <form autocomplete="off" [formGroup]="registerForm" (ngSubmit) = "createUser()">
             <div class="relative w-full mb-3">
               <label
                 class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -42,7 +42,13 @@
                 type="email"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Name"
+                formControlName="name"
               />
+              <div class="w-1/2">
+                <a class="text-red-700">
+                  <small *ngIf="invalidField('name')">El nombre es obligatorio</small>
+                </a>
+              </div>
             </div>
 
             <div class="relative w-full mb-3">
@@ -56,7 +62,13 @@
                 type="email"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Email"
+                formControlName="email"
               />
+              <div class="w-1/2">
+                <a class="text-red-700">
+                  <small *ngIf="invalidField('email')">El email es obligatorio y debe ser valido</small>
+                </a>
+              </div>
             </div>
 
             <div class="relative w-full mb-3">
@@ -70,7 +82,33 @@
                 type="password"
                 class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Password"
+                formControlName="password"
               />
+              <div class="w-1/2">
+                <a class="text-red-700">
+                  <small *ngIf="invalidField('password')">El password es obligatorio</small>
+                </a>
+              </div>
+            </div>
+
+            <div class="relative w-full mb-3">
+              <label
+                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                htmlFor="grid-password"
+              >
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                placeholder="Confirm Password"
+                formControlName="confirmPassword"
+              />
+              <div class="w-1/2">
+                <a class="text-red-700">
+                  <small *ngIf="InvalidPasswords()">Las Contraseñas deben ser iguales</small>
+                </a>
+              </div>
             </div>
 
             <div>
@@ -79,25 +117,40 @@
                   id="customCheckLogin"
                   type="checkbox"
                   class="form-checkbox border-0 text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150 rounded"
+                  formControlName="terms"
                 />
+
                 <span class="ml-2 text-sm font-semibold text-blueGray-600">
                   I agree with the
                   <a href="javascript:void(0)" class="text-red-600">
                     Privacy Policy
                   </a>
                 </span>
+
               </label>
+              <div class="w-auto">
+                <a class="text-red-700">
+                  <small *ngIf="termsAccept()">Debe aceptar los terminos</small>
+                </a>
+              </div>
             </div>
 
             <div class="text-center mt-6">
               <button
                 class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                type="button"
+                type="submit"
               >
                 Create Account
               </button>
             </div>
           </form>
+        </div>
+      </div>
+      <div class="flex flex-wrap mt-6 relative">
+        <div class="w-1/2">
+          <a href="javascript:void(0)" class="text-blueGray-200" [routerLink]="['/auth/login']">
+            <small>Already have an account?</small>
+          </a>
         </div>
       </div>
     </div>
