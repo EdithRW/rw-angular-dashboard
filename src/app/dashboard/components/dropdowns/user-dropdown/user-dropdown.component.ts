@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, AfterViewInit, ViewChild, ElementRef } from "@angular/core";
 import { createPopper } from "@popperjs/core";
+import { UserService } from "../../../../services/user.service";
 
 @Component({
   selector: "app-user-dropdown",
@@ -13,6 +14,13 @@ export class UserDropdownComponent implements AfterViewInit {
   @ViewChild("btnDropdownRef", { static: false }) btnDropdownRef!: ElementRef;
   @ViewChild("popoverDropdownRef", { static: false })
   popoverDropdownRef!: ElementRef;
+
+  public imgUrl : string = '';
+
+  constructor( private userService : UserService){
+    this.imgUrl = userService.userInfo!.imgUrl;
+  }
+
   ngAfterViewInit() {
     createPopper(
       this.btnDropdownRef.nativeElement,
@@ -22,6 +30,7 @@ export class UserDropdownComponent implements AfterViewInit {
       }
     );
   }
+
   toggleDropdown(event:any) {
     event.preventDefault();
     if (this.dropdownPopoverShow) {
@@ -30,4 +39,9 @@ export class UserDropdownComponent implements AfterViewInit {
       this.dropdownPopoverShow = true;
     }
   }
+
+  logout(){
+    this.userService.logout();
+  }
+
 }
