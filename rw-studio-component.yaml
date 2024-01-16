@@ -14,3 +14,4 @@ spec:
   type: website
   lifecycle: experimental
   owner: Devs
+  consumesApis: ['api:auth', 'api:users', 'api:files']
