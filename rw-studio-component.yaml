@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: rw-studio
+  description: The rw studio front end website
+  tags:
+    - rw-studio
+  links:
+    - url: http://localhost:4200
+      title: RW Studio
+      icon: dashboard
+      type: admin-dashboard
+spec:
+  type: website
+  lifecycle: experimental
+  owner: Devs
